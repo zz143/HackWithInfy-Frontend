@@ -1,3 +1,8 @@
-$('.btn-expand-collapse').click(function(e) {
-				$('.navbar-primary').toggleClass('collapsed');
-});
+<script>
+  $(function() {
+    $('#toggle-two').bootstrapToggle({
+      on: 'Enabled',
+      off: 'Disabled'
+    });
+  })
+</script>
