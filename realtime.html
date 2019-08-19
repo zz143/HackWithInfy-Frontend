@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://use.fontawesome.com/f15cb7555a.js"></script>
+    <title>HackWithInfy - Real time</title>
+  </head>
+  <body>
+     <table style="width:100%;width:100%;" id="ex-table">
+      <tr id="tr">
+        <th>Id</th>
+       <th>Name</th>
+       <th>Email</th>
+       <th>Phone</th>
+     </table> 
+
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBq9j3Fd9cO6ox6OV9hMKjhPy7_aUpjHqU",
+        authDomain: "hackathon-team-13.firebaseapp.com",
+        databaseURL: "https://hackathon-team-13.firebaseio.com",
+        projectId: "hackathon-team-13",
+        storageBucket: "",
+        messagingSenderId: "780498370702",
+        appId: "1:780498370702:web:b006adf31cceaa69"
+      }
+        
+        firebase.initializeApp(config);
+      
+       var database = firebase.database().ref('qrCode');
+        database.on('value', function(snapshot){
+            if(snapshot.exists()){
+                var content = '';
+                snapshot.forEach(function(data){
+                    var val = data.val();
+                    content +='<tr>';
+                    content += '<td>' + val.deviceId + '</td>';
+            content += '<td>' + val.email + '</td>';
+            content += '<td>' + val.name + '</td>';
+            content += '<td>' + val.phone + '</td>';
+                    content += '</tr>';
+                });
+                $('#ex-table').append(content);
+            }
+        });
+
+        /*
+        var starCountRef = firebase.database().ref('posts/' + postId + '/starCount');
+starCountRef.on('value', function(snapshot) {
+  updateStarCount(postElement, snapshot.val());
+});
+*/
+     </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+  </body>
+  </html>
